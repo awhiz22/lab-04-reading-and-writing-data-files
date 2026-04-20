@@ -1,0 +1,271 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "bccccbae-5271-404b-ab63-b6fc2ac911c3",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\evovo\\lab-04-reading-and-writing-data-files\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pathlib import Path\n",
+    "\n",
+    "cwd = Path.cwd()\n",
+    "print(cwd)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "639f2e95-8182-4a1f-9c0b-ceb938827778",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "FileNotFoundError",
+     "evalue": "[Errno 2] No such file or directory: 'data\\\\beanscene_menu.csv'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[31m---------------------------------------------------------------------------\u001b[39m",
+      "\u001b[31mFileNotFoundError\u001b[39m                         Traceback (most recent call last)",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[12]\u001b[39m\u001b[32m, line 8\u001b[39m\n\u001b[32m      4\u001b[39m file_path = Path(\u001b[33m\"\u001b[39m\u001b[33mdata/beanscene_menu.csv\u001b[39m\u001b[33m\"\u001b[39m)\n\u001b[32m      6\u001b[39m data = []\n\u001b[32m----> \u001b[39m\u001b[32m8\u001b[39m \u001b[38;5;28;01mwith\u001b[39;00m \u001b[43mfile_path\u001b[49m\u001b[43m.\u001b[49m\u001b[43mopen\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m \u001b[38;5;28;01mas\u001b[39;00m f:\n\u001b[32m      9\u001b[39m     reader = csv.DictReader(f)\n\u001b[32m     11\u001b[39m     \u001b[38;5;28;01mfor\u001b[39;00m row \u001b[38;5;129;01min\u001b[39;00m reader:\n",
+      "\u001b[36mFile \u001b[39m\u001b[32m~\\anaconda3\\Lib\\pathlib\\_local.py:537\u001b[39m, in \u001b[36mPath.open\u001b[39m\u001b[34m(self, mode, buffering, encoding, errors, newline)\u001b[39m\n\u001b[32m    535\u001b[39m \u001b[38;5;28;01mif\u001b[39;00m \u001b[33m\"\u001b[39m\u001b[33mb\u001b[39m\u001b[33m\"\u001b[39m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;129;01min\u001b[39;00m mode:\n\u001b[32m    536\u001b[39m     encoding = io.text_encoding(encoding)\n\u001b[32m--> \u001b[39m\u001b[32m537\u001b[39m \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[43mio\u001b[49m\u001b[43m.\u001b[49m\u001b[43mopen\u001b[49m\u001b[43m(\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mmode\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mbuffering\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mencoding\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43merrors\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mnewline\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[31mFileNotFoundError\u001b[39m: [Errno 2] No such file or directory: 'data\\\\beanscene_menu.csv'"
+     ]
+    }
+   ],
+   "source": [
+    "import csv\n",
+    "from pathlib import Path\n",
+    "\n",
+    "file_path = Path(\"data/beanscene_menu.csv\")\n",
+    "\n",
+    "data = []\n",
+    "\n",
+    "with file_path.open() as f:\n",
+    "    reader = csv.DictReader(f)\n",
+    "\n",
+    "    for row in reader:\n",
+    "        converted_row = {}\n",
+    "\n",
+    "        for key, value in row.items():\n",
+    "            value = value.strip()\n",
+    "\n",
+    "            if value.isdigit():\n",
+    "                converted_row[key] = int(value)\n",
+    "\n",
+    "            else:\n",
+    "                try:\n",
+    "                    converted_row[key] = float(value)\n",
+    "                except ValueError:\n",
+    "                    conveted_row[key] = value\n",
+    "\n",
+    "        data.append(converted_row)\n",
+    "\n",
+    "print(data[:3])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "bb07c5d4-1cc9-4f22-8fa6-5b2e23e11977",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\evovo\\lab-04-reading-and-writing-data-files\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pathlib import Path\n",
+    "print(Path.cwd())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "d721a00a-a5cd-4f97-9548-e869719f702e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      ".git\n",
+      ".gitignore\n",
+      ".ipynb_checkpoints\n",
+      ".virtual_documents\n",
+      "anaconda_projects\n",
+      "data\n",
+      "notebooks\n",
+      "README.md\n",
+      "Untitled.ipynb\n"
+     ]
+    }
+   ],
+   "source": [
+    "for f in Path.cwd().iterdir():\n",
+    "    print(f.name)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "5b15add9-9bbd-4ed5-a563-f7435e140f0e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "file_path = Path(\"data/beanscene_menu.csv\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "0c0bece0-ef63-420b-8c15-4913bc166b04",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(file_path.exists())  # should be True"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "645580e0-1709-4580-a4d7-7a7fcce215e8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "C:\\Users\\evovo\\lab-04-reading-and-writing-data-files\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pathlib import Path\n",
+    "print(Path.cwd())\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "977251da-619a-4250-b651-be74ed277a82",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      ".git\n",
+      ".gitignore\n",
+      ".ipynb_checkpoints\n",
+      ".virtual_documents\n",
+      "anaconda_projects\n",
+      "data\n",
+      "notebooks\n",
+      "README.md\n",
+      "Untitled.ipynb\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pathlib import Path\n",
+    "\n",
+    "for f in Path.cwd().iterdir():\n",
+    "    print(f.name)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "3443440f-28f7-43be-9ef9-84324a8ff0bf",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "False\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pathlib import Path\n",
+    "\n",
+    "file_path = Path(\"data/beanscene_menu.csv\")\n",
+    "print(file_path.exists())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "efb78467-8a98-4979-9b55-bd53e203e791",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "'processed'\n",
+      "'raw'\n"
+     ]
+    }
+   ],
+   "source": [
+    "from pathlib import Path\n",
+    "\n",
+    "for f in Path(\"data\").iterdir():\n",
+    "    print(repr(f.name))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b4fb13fd-fe8e-443b-8ad0-aefd83c85815",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
