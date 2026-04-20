@@ -208,3 +208,6 @@ __marimo__/
 .DS_Store
 .virtual_documents/
 *.db
+anaconda_projects/
+.virtual_documents/
+*.db
